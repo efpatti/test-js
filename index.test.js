@@ -1,6 +1,6 @@
 import assert from "assert";
-import Product from "./product";
-import Service from "./service";
+import Product from "./product.js";
+import Service from "./service.js";
 
 // should throw an error when description is less than 5 characters long
 {
