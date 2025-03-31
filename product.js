@@ -27,11 +27,21 @@ export default class Product {
      ...next,
     };
    }, {});
+
+  return finalObject;
  }
 
  async create(data) {
-  this.#isValid(data);
-  const message = await this.service.save(data);
-  return message.toUppercase();
+  this.#isValid(data); // Ainda faz a validação antes de processar os dados
+  const mappedObject = this.#uppercaseStrings(data);
+  console.log({ mappedObject });
+
+  // Aqui, a função 'create' deve lançar uma Promise rejeitada se a validação falhar
+  return new Promise((resolve, reject) => {
+   this.service
+    .save(mappedObject)
+    .then((message) => resolve(message))
+    .catch((error) => reject(error)); // Caso o erro venha da service.save()
+  });
  }
 }
