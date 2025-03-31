@@ -14,12 +14,19 @@ export default class Product {
  }
 
  #uppercaseStrings(data) {
-  const finalObject = Reflect.ownKeys(data).map((key) => {
-   const item = data[key];
-   return {
-    [key]: typeof item === "string" ? item.toUpperCase() : item,
-   };
-  });
+  const finalObject = Reflect.ownKeys(data)
+   .map((key) => {
+    const item = data[key];
+    return {
+     [key]: typeof item === "string" ? item.toUpperCase() : item,
+    };
+   })
+   .reduce((prev, next) => {
+    return {
+     ...prev,
+     ...next,
+    };
+   }, {});
  }
 
  async create(data) {
